@@ -1,0 +1,130 @@
+<div class="container mt-3 mb-3">
+    <div class="card">
+        <div class="card-header">
+            Cerveja Selecionada:
+        </div>
+        <div class="card-body" *ngIf="cerveja.idCerveja">
+            <form>
+                <div class="text-center">
+                    <p-image [src]="cerveja.foto" alt="" height="200px" [preview]="true"></p-image>
+                    <!-- <img alt="" [src]="cerveja.foto" class="seta" height="200px" data-bs-toggle="modal"
+            data-bs-target="#ModalImage" /> -->
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Escolha uma Foto da sua Cerveja</label>
+                    <input (change)="convertFoto($event)" class="form-control" type="file" id="formFile"
+                        name="formFile">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Cervejearia</label>
+                    <input placeholder="Cervejearia" [(ngModel)]="cerveja.cervejearia" type="text" class="form-control"
+                        name="cervejearia">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Marca</label>
+                    <input placeholder="marca" [(ngModel)]="cerveja.marca" type="text" class="form-control"
+                        name="marca">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Estilo</label>
+                    <input placeholder="estilo" [(ngModel)]="cerveja.estilo" type="text" class="form-control"
+                        name="estilo">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Copo</label>
+                    <input placeholder="copo" [(ngModel)]="cerveja.copo" type="text" class="form-control" name="copo">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">ABV</label>
+                    <input placeholder="abv" [(ngModel)]="cerveja.abv" type="text" class="form-control" name="abv">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">IBU</label>
+                    <input placeholder="ibu" [(ngModel)]="cerveja.ibu" type="text" class="form-control" name="ibu">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Temperatura</label>
+                    <h6 class="text-center">Temperatura: {{cerveja.temperatura[0] + ' a ' + cerveja.temperatura[1]}}
+                    </h6>
+                    <p-slider name="temperatura_range" [(ngModel)]="cerveja.temperatura" [range]="true" [min]="-5"
+                        [max]="17">
+                    </p-slider>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Espuma</label>
+                    <input placeholder="espuma" [(ngModel)]="cerveja.espuma" type="text" class="form-control"
+                        name="espuma">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Coloração</label>
+                    <input placeholder="Coloração" [(ngModel)]="cerveja.coloracao" type="text" class="form-control"
+                        name="coloracao">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Brilho</label>
+                    <input placeholder="brilho" [(ngModel)]="cerveja.brilho" type="text" class="form-control"
+                        name="brilho">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Aromas</label>
+                    <input placeholder="aroma" [(ngModel)]="cerveja.aroma" type="text" class="form-control"
+                        name="aroma">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Sabores</label>
+                    <input placeholder="sabor" [(ngModel)]="cerveja.sabor" type="text" class="form-control"
+                        name="sabor">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Harmonização</label>
+                    <textarea placeholder="hamonização" [(ngModel)]="cerveja.harmonizacao" type="text"
+                        class="form-control" name="harmonizacao"></textarea>
+                </div>
+                <div class="centro">
+                    <h6 class="card-title">Notas dos Chears</h6>
+                    <div class="card" style="width: 20rem;" *ngFor="let nota of cerveja.nota">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <label class="form-label">Avaliação</label> {{nota.avaliacao}}
+                                <p-rating name="{{nota.idNota}}" [(ngModel)]="nota.avaliacao" [stars]=10
+                                    [cancel]="false" [readonly]="true"></p-rating>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Descrição:</label><br>
+                                <label> {{nota.nota_pessoal}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <app-nota [cerveja]="cerveja"></app-nota>
+                    <button type="button" (click)="alterar()" class="btn btn-primary">Alterar</button>
+                    <button type="button" (click)="voltar()" class="btn btn-secondary">Voltar</button>
+                </div>
+
+            </form>
+        </div>
+        <div *ngIf="!cerveja.idCerveja">
+            <app-loading></app-loading>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="ModalImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{cerveja.marca}} - {{cerveja.estilo}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img [src]="cerveja.foto" width="100%" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div> -->

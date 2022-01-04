@@ -1,0 +1,23 @@
+.texto {
+  position: relative;
+  text-align: center;
+  line-height: 7rem;
+}
+
+.right {
+  position: relative;
+  text-align: right;
+}
+
+.btn-tamanho {
+  line-height: 7rem;
+}
+
+.centro {
+   display: flex;
+   position: relative;
+   flex-wrap: nowrap;
+   align-content: center;
+   justify-content: center;
+   align-items: center;
+}

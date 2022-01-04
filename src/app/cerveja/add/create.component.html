@@ -1,0 +1,234 @@
+<div class="container mt-3">
+    <div class="card-header">
+        Adicionar Cerveja
+    </div>
+    <nb-card>
+        <form class="centro">
+            <nb-card-body>
+                <nb-stepper orientation="vertical">
+                    <nb-step>
+                        <h4>Informações do Rótulo</h4>
+                        <div class="text-center">
+                            <img alt="" [src]="cerveja.foto" height="200px" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Escolha uma Foto da sua Cerveja</label>
+                            <input (change)="convertFoto($event)" class="form-control" type="file" id="formFile" name="formFile">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Cervejearia</label>
+                            <input placeholder="Cervejearia" [(ngModel)]="cerveja.cervejearia" type="text" class="form-control" name="cervejearia">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Marca</label>
+                            <input placeholder="Marca" [(ngModel)]="cerveja.marca" type="text" class="form-control" name="marca">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Estilo</label>
+                            <input placeholder="Estilo" [(ngModel)]="cerveja.estilo" type="text" class="form-control" name="estilo">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Copo</label>
+                            <input placeholder="Copo" [(ngModel)]="cerveja.copo" type="text" class="form-control" name="copo">
+                        </div>
+                        <div class="text-center">
+                            <button nbButton disabled nbStepperPrevious>prev</button>
+                            <button nbButton nbStepperNext>next</button>
+                        </div>
+                    </nb-step>
+                    <nb-step>
+                        <h4>Informações Técnica</h4>
+                        <br>
+                        <div class="mb-3 text-center">
+                            <h6>ABV {{cerveja.abv+'%'}}</h6>
+                            <input placeholder="Abv" type="range" class="form-range" name="abv" [(ngModel)]="cerveja.abv" min="0" max="20" step="0.1">
+                        </div>
+                        <div class="mb-3 text-center">
+                            <h6>IBU {{cerveja.ibu}}</h6>
+                            <input placeholder="Ibu" type="range" class="form-range" name="ibu" [(ngModel)]="cerveja.ibu" min="0" max="100">
+                        </div>
+                        <div class="mb-3 text-center">
+                            <!--<label for="customRange1" class="form-label">Temperatura {{cerveja.temperatura}}</label>
+                     <input type="range" class="form-range" name="temperatura_slider" [(ngModel)]="cerveja.temperatura"
+                        min="-15" max="15">-->
+                            <h6>Temperatura: {{cerveja.temperatura[0] + ' a ' + cerveja.temperatura[1]}}</h6>
+                            <p-slider name="temperatura_range" [(ngModel)]="cerveja.temperatura" [range]="true" [min]="-5" [max]="17">
+                            </p-slider>
+                        </div>
+                        <div class="text-center">
+                            <button nbButton nbStepperPrevious>prev</button>
+                            <button nbButton nbStepperNext>next</button>
+                        </div>
+                    </nb-step>
+                    <nb-step>
+                        <h4>Como ela é no Copo</h4>
+                        <br>
+                        <div class="mb-3">
+                            <label class="form-label">Espuma</label>
+                            <select class="form-select" name="espuma" [(ngModel)]="cerveja.espuma">
+                        <option value="baixa">Baixa</option>
+                        <option value="média">Média</option>
+                        <option value="alta">Alta</option>
+                     </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Coloração</label>
+                            <select class="form-select" name="coloracao" [(ngModel)]="cerveja.coloracao">
+                        <option value="amarela">Amarela</option>
+                        <option value="dourada">Dourada</option>
+                        <option value="âmbar">Âmbar</option>
+                        <option value="vermelha">Vermelha</option>
+                        <option value="marrom">Marrom</option>
+                        <option value="preta">Preta</option>
+                     </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Brilho</label>
+                            <select class="form-select" name="brilho" [(ngModel)]="cerveja.brilho">
+                        <option value="brilhante">Brilhante</option>
+                        <option value="turvo">Turvo</option>
+                        <option value="opaco">Opaco</option>
+                     </select>
+                        </div>
+                        <div class="text-center">
+                            <button nbButton nbStepperPrevious>prev</button>
+                            <button nbButton nbStepperNext>next</button>
+                        </div>
+                    </nb-step>
+                    <nb-step>
+                        <h4>Informações Sensoriais</h4>
+                        <br>
+                        <div class="mb-3">
+                            <label class="form-label">Aromas</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="adocicado" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox1">Adocicado</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="alcool" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox2">Álcool</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="caramelo" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Caramelo</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="citrico" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Cítrico</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="defumado" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Defumado</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="especiarias" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Especiarias</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="fermento" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Fermento</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="floral" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Floral</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="frutado" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Frutado</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="herbal" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Herbal</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="malte" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Malte</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="tostado" (click)="setAroma($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Tostado</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Sabores</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="adocicado" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox1">Adocicado</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="alcool" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox2">Álcool</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="caramelo" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Caramelo</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="citrico" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Cítrico</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="defumado" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Defumado</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="especiarias" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Especiarias</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="fermento" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Fermento</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="floral" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Floral</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="frutado" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Frutado</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="herbal" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Herbal</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="malte" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Malte</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="tostado" (click)="setSabor($event)">
+                                <label class="form-check-label" for="inlineCheckbox3">Tostado</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Harmonização</label>
+                            <textarea placeholder="Harmonização" pInputTextarea autoResize="autoResize" [(ngModel)]="cerveja.harmonizacao" name="harmonizacao" rows="5" type="text" class="form-control text-area" name="harmonizacao"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button nbButton nbStepperPrevious>prev</button>
+                            <button nbButton nbStepperNext>next</button>
+                        </div>
+                    </nb-step>
+                    <nb-step>
+                        <h4>Avaliação</h4>
+                        <br>
+                        <div class="mb-3 text-center">
+                            <label for="customRange1" class="form-label">Avaliação {{nota.avaliacao}}</label>
+                            <input placeholder="Avaliação" type="range" class="form-range" name="avaliacao_slider" [(ngModel)]="nota.avaliacao" min="1" max="10">
+                            <p-rating name="avaliacao_stars" [(ngModel)]="nota.avaliacao" [stars]=10 [cancel]="false">
+                            </p-rating>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nota Pessoal</label>
+                            <textarea placeholder="Nota Pessoal" pInputTextarea autoResize="autoResize" [(ngModel)]="nota.nota_pessoal" type="text" class="form-control" name="nota_pessoal"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button nbButton nbStepperPrevious>prev</button>
+                            <button (click)="save()" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </nb-step>
+                </nb-stepper>
+            </nb-card-body>
+        </form>
+    </nb-card>
+</div>

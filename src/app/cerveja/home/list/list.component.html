@@ -1,0 +1,93 @@
+<p-dataView [value]="cervejas" [paginator]="true" [rows]="10" *ngIf="cervejas?.length">
+  <ng-template let-cerveja pTemplate="listItem">
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4 text-center">
+          <a routerLink="/select/{{cerveja.idCerveja}}">
+            <img alt="" [src]="cerveja.foto" height="120" width="100">
+          </a>
+        </div>
+        <div class="col-md-4">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{cerveja.marca}}</h5>
+            <p class="card-text">{{cerveja.estilo}}</p>
+            <p class="card-text">
+              <small class="text-muted">
+                <p-rating name="avaliacao_stars" [(ngModel)]="cerveja.media" [stars]=10 [cancel]="false" [readonly]="true"></p-rating>
+              </small>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-2 text-center centro">
+          <button routerLink="/select/{{cerveja.idCerveja}}" class="p-button-lg p-button-primary p-button-outlined" pButton>Selecionar</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-dataView>
+
+<div class="text-center" *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+<div class="text-center" *ngIf="!loading && !cervejas?.length">Não foi encontrado nenhum rótulo</div>
+
+
+
+<!-- <div class="container mt-3">
+   <table class="table table-hover" *ngIf="cervejas?.length">
+      <thead>
+         <tr>
+           <th class="text-left" scope="col">Cerveja</th>
+           <th class="text-center" scope="col">Marca</th>
+           <th class="text-center" scope="col">Estilo</th>
+           <th class="text-center" scope="col">Detalhes</th>
+         </tr>
+       </thead>
+       <tbody>
+        <tr *ngFor="let cerveja of cervejas">
+          <th class="text-left">
+            <a routerLink="/select/{{cerveja.idCerveja}}">
+              <img alt="" [src]="cerveja.foto" height="120" width="100">
+            </a>
+          </th>
+          <td class="texto">{{cerveja.marca}}</td>
+          <td class="texto">{{cerveja.estilo}}</td>
+          <td class="texto"><a routerLink="/select/{{cerveja.idCerveja}}" class="btn btn-outline-primary">Selecionar</a></td>
+        </tr>
+       </tbody>
+    </table>
+    <div class="text-center" *ngIf="loading"><app-loading></app-loading></div>
+    <div class="text-center" *ngIf="!loading && !cervejas?.length">Não foi encontrado nenhum rótulo</div>
+</div> -->
+
+
+<!-- <div class="container mt-3">
+  <div class="row">
+    <div class="col text-left">
+      <h6>Cerveja</h6>
+    </div>
+    <div class="col text-center">
+      <h6>Marca</h6>
+    </div>
+    <div class="col text-center">
+      <h6>Estilo</h6>
+    </div>
+    <div class="col text-center">
+      <h6>Detalhes</h6>
+    </div>
+  </div>
+  <div class="row" *ngFor="let cerveja of cervejas">
+    <div class="col text-left">
+      <img alt="" [src]="cerveja.foto" height="120" width="100">
+    </div>
+    <div class="col texto">
+      {{cerveja.marca}}
+    </div>
+    <div class="col texto">
+      {{cerveja.estilo}}
+    </div>
+    <div class="col texto">
+      <a routerLink="/select/{{cerveja.idCerveja}}" class="btn btn-outline-primary">Selecionar</a>
+    </div>
+  </div>
+</div> -->
